@@ -1,0 +1,28 @@
+---
+sudo: required
+language: python
+services:
+  - docker
+
+env:
+  global:
+    - ROLE_NAME: php
+  matrix:
+    - MOLECULE_DISTRO: centos7
+
+install:
+  - pip install -r requirements.txt
+
+before_script:
+  # Use actual Ansible Galaxy role name for the project directory.
+  - cd ../
+  - mv ansible-role-$ROLE_NAME steve.$ROLE_NAME
+  - cd steve.$ROLE_NAME
+
+script:
+  - molecule --version
+  - ansible --version
+  - molecule test
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

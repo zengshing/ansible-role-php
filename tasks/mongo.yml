@@ -1,0 +1,30 @@
+---
+
+- name: Upload monogdb package.
+  copy:
+    src: "{{ mongodb_package }}"
+    dest: "{{ software_dir }}"
+    remote_src: false
+
+- name: Unarchive monogdb package.
+  unarchive:
+    src: "{{ software_dir }}{{ mongodb_package }}"
+    dest: /usr/local/src/
+    remote_src: false
+
+- name: Install mongodb.
+  shell: |
+         cd /usr/local/src/mongo-1.6.16
+         /usr/bin/phpize
+         ./configure
+         make
+         make install
+  args:
+    executable: /bin/bash
+
+- name: Copy php.ini
+  copy:
+    src: php.ini
+    dest: /etc/php.ini
+    remote_src: false
+  notify: restart php-fpm

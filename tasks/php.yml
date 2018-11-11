@@ -1,0 +1,19 @@
+---
+- name: Check if php-fpm is already installed.
+  stat: path="/etc/systemd/system/php-fpm.service.d"
+  register: php_fpm
+
+- name: Install php If php_fpm is not install
+  yum:
+    name: "{{ item }}"
+    state: present
+    enablerepo: "remi,remi-php56"
+  with_items:
+    - "{{ php_packages }}"
+
+- name: Confiugre php-fpm.
+  lineinfile:
+    path: /etc/php-fpm.d/www.conf
+    regexp: "^;listen = 127.0.0.1:9000"
+    line: "listen = 127.0.0.1:9002"
+  notify: start php-fpm
