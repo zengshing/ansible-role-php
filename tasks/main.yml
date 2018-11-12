@@ -1,2 +1,8 @@
 ---
 # tasks file for demo
+- name: Include os-special variables.
+  include_tasks: variables.yml
+
+- include_tasks: remi-php.yml
+- include_tasks: php.yml
+- include_tasks: mongo.yml
