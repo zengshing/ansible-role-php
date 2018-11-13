@@ -16,4 +16,4 @@
     path: /etc/php-fpm.d/www.conf
     regexp: "^;listen = 127.0.0.1:9000"
     line: "listen = 127.0.0.1:9002"
-  notify: Start php-fpm
+  notify: Start php-fpm.
