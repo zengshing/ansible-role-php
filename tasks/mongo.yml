@@ -1,26 +1,27 @@
 ---
 
-- name: Upload monogdb package.
-  copy:
-    src: "{{ mongodb_package }}"
-    dest: "{{ software_dir }}"
-    remote_src: false
-
 - name: Unarchive monogdb package.
   unarchive:
-    src: "{{ software_dir }}{{ mongodb_package }}"
+    src: "{{ mongodb_package }}"
     dest: /usr/local/src/
     remote_src: false
+    creates: "/usr/local/src/mongo-{{ mongo_version }}"
+
+- name: Compile mongodb.
+  command: |
+          /usr/bin/phpize
+          ./configure
+  args:
+    chdir: "/usr/local/src/mongo-{{ mongo_version }}"
+    creates: /usr/lib64/php/modules/mongo.so
 
 - name: Install mongodb.
-  shell: |
-         cd /usr/local/src/mongo-1.6.16
-         /usr/bin/phpize
-         ./configure
-         make
-         make install
+  command: |
+          make -j{{ ansible_processor_cores|default(1) + 1 }}{{ ' 32bit' if redis_make_32bit|bool else '' }}
+          make install
   args:
-    executable: /bin/bash
+    chdir: "/usr/local/src/mongo-{{ mongo_version }}"
+    creates: /usr/lib64/php/modules/mongo.so
 
 - name: Copy php.ini
   copy:

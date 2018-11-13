@@ -2,3 +2,6 @@
 # defaults file for demo
 
 mongo_package: mongo-1.6.16.tgz
+mongo_version: 1.6.16
+
+software_dir: /opt/software/
