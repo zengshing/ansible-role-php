@@ -8,3 +8,4 @@ __php_packages:
   - php-pecl-mongo
   - php-mysqlnd
   - php-pecl-redis
+__php_daemon: php-fpm
