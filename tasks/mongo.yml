@@ -2,7 +2,7 @@
 
 - name: Unarchive monogdb package.
   unarchive:
-    src: "{{ mongodb_package }}"
+    src: "{{ mongo_package }}"
     dest: /usr/local/src/
     remote_src: false
     creates: "/usr/local/src/mongo-{{ mongo_version }}"
