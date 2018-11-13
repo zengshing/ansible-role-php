@@ -2,7 +2,7 @@
 
 - name: Ensure that config directory is exists
   file: state=directory path="{{ software_dir }}"
-  
+
 - name: Upload remi-repo.
   copy:
     remote_src: false
@@ -11,5 +11,5 @@
 
 - name: Install remi repo.
   yum:
-    name: "{{ software_dir }}"remi-release-7.rpm
+    name: "{{ software_dir }}remi-release-7.rpm"
     state: present
