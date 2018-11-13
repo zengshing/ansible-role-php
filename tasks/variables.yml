@@ -6,3 +6,8 @@
   set_fact:
     php_packages: "{{ __php_packages }}"
   when: php_packages is not defined
+
+- name: Define php_daemon.
+  set_fact:
+    php_daemon: "{{ __php_daemon }}"
+  when: php_daemon is not defined

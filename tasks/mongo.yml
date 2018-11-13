@@ -28,4 +28,4 @@
     src: php.ini
     dest: /etc/php.ini
     remote_src: false
-  notify: restart php-fpm
+  notify: Restart php-fpm

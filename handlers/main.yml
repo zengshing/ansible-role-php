@@ -2,11 +2,11 @@
 # handlers file for php
 - name: Start php-fpm.
   service:
-    name: php-fpm
+    name: "{{ php_daemon }}"
     state: started
     enabled: true
 
 - name: Restart php-fpm.
   service:
-    name: php-fpm
+    name: "{{ php_daemon }}"
     state: restarted
