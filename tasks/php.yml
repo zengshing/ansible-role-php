@@ -12,8 +12,8 @@
     - "{{ php_packages }}"
 
 - name: Confiugre php-fpm.
-  lineinfile:
-    path: /etc/php-fpm.d/www.conf
-    regexp: "^;listen = 127.0.0.1:9000"
-    line: "listen = 127.0.0.1:9002"
+  template:
+    remote_src: false
+    src: www.conf.j2
+    dest: /etc/php-fpm.d/
   notify: Start php-fpm.
