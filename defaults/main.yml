@@ -5,3 +5,6 @@ mongo_package: mongo-1.6.16.tgz
 mongo_version: 1.6.16
 
 software_dir: /opt/software/
+
+php_listen_address: 127.0.0.1
+php_listen_port: 9002
