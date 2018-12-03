@@ -15,5 +15,5 @@
   template:
     remote_src: false
     src: www.conf.j2
-    dest: /etc/php-fpm.d/
+    dest: /etc/php-fpm.d/www.conf
   notify: Start php-fpm.
